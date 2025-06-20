@@ -1,196 +1,142 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>UNO Score Tracker</title>
-<style>
-  :root {
-    --primary: #ff5c5c;
-    --secondary: #5c9cff;
-    --bg-light: #fff;
-    --bg-dark: #121212;
-    --text-light: #fff;
-    --text-dark: #000;
-  }
-
-  body {
-    font-family: "Segoe UI", sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    transition: all 0.3s ease;
-    margin: 0;
-    padding: 0;
-  }
-
-  body.dark-mode {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-  }
-
-  .container {
-    max-width: 900px;
-    margin: auto;
-    padding: 2rem;
-  }
-
-  h1 {
-    text-align: center;
-    color: var(--primary);
-  }
-
-  .dark-toggle {
-    float: right;
-    font-size: 0.9rem;
-    margin-top: -2rem;
-    margin-right: 1rem;
-  }
-
-  .controls, .score-inputs, #resultsContainer, #rematchContainer {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    padding: 1rem;
-    margin-top: 1.5rem;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-
-  body.dark-mode .controls,
-  body.dark-mode .score-inputs,
-  body.dark-mode #resultsContainer,
-  body.dark-mode #rematchContainer {
-    background: rgba(40, 40, 40, 0.9);
-  }
-
-  label {
-    display: block;
-    margin-top: 0.5rem;
-    font-weight: bold;
-  }
-
-  input[type="text"], input[type="number"] {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-top: 0.3rem;
-  }
-
-  button {
-    padding: 0.7rem 1.2rem;
-    font-size: 1rem;
-    background-color: var(--secondary);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    margin-top: 1rem;
-  }
-
-  button:hover {
-    background-color: #4a84e0;
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    padding: 0.3rem 0;
-  }
-
-  #gameCount {
-    font-size: 1.2rem;
-    text-align: center;
-    margin-top: 1rem;
-  }
-
-  @media screen and (max-width: 600px) {
-    .container {
-      padding: 1rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNO Score Tracker</title>
+  <style>
+    :root {
+      --primary: #ff5c5c;
+      --secondary: #5c9cff;
+      --bg-light: #fff;
+      --bg-dark: #121212;
+      --text-light: #fff;
+      --text-dark: #000;
     }
-  }
-</style>
 
-<link rel="manifest" href="manifest.json" />
-<link rel="apple-touch-icon" href="icon-192.png" />
-<meta name="theme-color" content="#2196F3" />
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+      margin: 0;
+      padding: 0;
+    }
 
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(() => console.log('✅ Service Worker registered!'))
-        .catch(err => console.error('Service Worker failed:', err));
-    });
-  }
-</script>
+    body.dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+    }
 
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .dark-toggle {
+      float: right;
+      font-size: 0.9rem;
+      margin-top: -2rem;
+      margin-right: 1rem;
+    }
+
+    .controls, .score-inputs, #resultsContainer, #rematchContainer, #gameHistoryContainer {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    body.dark-mode .controls,
+    body.dark-mode .score-inputs,
+    body.dark-mode #resultsContainer,
+    body.dark-mode #rematchContainer,
+    body.dark-mode #gameHistoryContainer {
+      background: rgba(40, 40, 40, 0.9);
+    }
+
+    label {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 0.3rem;
+    }
+
+    button {
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+      background-color: var(--secondary);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    button:hover {
+      background-color: #4a84e0;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 0.3rem 0;
+    }
+
+    #gameCount {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>UNO Score Tracker</h1>
-
-<div class="dark-toggle">
-  <label><input type="checkbox" id="darkModeToggle" /> Dark Mode</label>
-</div>
-
-    <label for="playerNames">Player Names (comma separated):</label>
-    <input type="text" id="playerNames" placeholder="e.g. Kwame, Abena, Kojo" />
-
-    <button id="startMatchBtn">Start Match</button>
-
-    <div id="gameArea" style="display:none; margin-top: 1rem;">
-      <div>Game #: <span id="gameNumber">1</span></div>
-
-      <div id="playerInputs"></div>
-
-      <button id="submitGameBtn">Submit Game</button>
-      <button id="endMatchBtn" style="margin-left: 1rem;">End Match</button>
-    </div>
-
-    <div id="resultsArea" style="display:none;">
-      <div class="winner" id="winnerMessage"></div>
-
-      <label for="roastTone" style="margin-top: 1rem; display:block;">Roast Personality:</label>
-      <select id="roastTone">
-        <option value="sassy">😈 Sassy</option>
-        <option value="auntie">🧓 Auntie (Twi/English)</option>
-        <option value="wise">🧙 Wise</option>
-        <option value="pirate">🏴‍☠️ Pirate</option>
-        <option value="kind">🤗 Kind</option>
-      </select>
-
-      <button id="hearRoastBtn" style="margin-top: 0.5rem;">🔊 Hear Roast</button>
-
-      <div class="game-log" id="gameLog"></div>
-
-
-      <button id="resetMatchBtn" style="margin-top: 1rem;">New Match / Reset</button>
-    </div>
-
-
-
-<div id="rematchContainer" style="display:none; margin-top: 20px;">
-  <label for="rematchCount">Loser, choose rematch games to play:</label>
-  <input type="number" id="rematchCount" min="1" value="1" />
-  <button id="startRematchBtn">Start Rematch Series</button>
-</div>
-
-
     <div class="dark-toggle">
       <label><input type="checkbox" id="darkModeToggle" /> Dark Mode</label>
     </div>
+    <div class="controls">
+      <button id="startGameBtn">Start Game</button>
+      <button id="endGameBtn">End Game</button>
+    </div>
+    <div id="gameCount"></div>
+    <div class="score-inputs" id="playerInputs"></div>
+    <div id="resultsContainer"></div>
+    <div id="gameHistoryContainer" style="display: none;"></div>
+    <div class="controls">
+      <button id="toggleHistoryBtn">📜 View Game History</button>
+    </div>
+    <div id="rematchContainer" style="display: none;">
+      <label for="rematchCount">How many more games should the loser play?</label>
+      <input type="number" id="rematchCount" min="1" />
+      <button id="startRematchBtn">Start Rematch</button>
+    </div>
   </div>
-
-<script type="module" src="script.js"></script>
-<script>
-  document.getElementById("darkModeToggle").addEventListener("change", function () {
-    document.body.classList.toggle("dark-mode", this.checked);
-  });
-</script>
-
-
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("darkModeToggle").addEventListener("change", function () {
+      document.body.classList.toggle("dark-mode", this.checked);
+    });
+  </script>
 </body>
 </html>
